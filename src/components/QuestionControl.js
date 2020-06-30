@@ -34,6 +34,11 @@ class QuestionControl extends React.Component {
         question2Response: !prevState.question2Response,
         question3Response: !prevState.question3Response
       }));
+    } else if (this.state.clickCounter >= 4) {
+      this.setState({
+        clickCounter: 0,
+        question3Response: false
+      })
     }
     console.log(this.state.clickCounter);
     console.log("Q1 " + this.state.question1Response + " Q2 " + this.state.question2Response + " Q3 " + this.state.question3Response);
@@ -42,10 +47,14 @@ class QuestionControl extends React.Component {
   render() {
     let currentlyVisibleQuestion = null;
     let buttonText = null;
-    if (this.state.clickCounter > 3) {
+    if (this.state.clickCounter === 4) {
       currentlyVisibleQuestion = <NewTicketForm />
       buttonText = "Submit Ticket";
-    } else if (this.state.question1Response) {
+    } else if (this.state.clickCounter > 4) {
+      currentlyVisibleQuestion = <TicketList />
+      buttonText = "Submit Question";
+    }
+    else if (this.state.question1Response) {
       currentlyVisibleQuestion = <LessonQuestion1 />
       buttonText = "Yes";
     } else if (this.state.question2Response) {
@@ -68,3 +77,10 @@ class QuestionControl extends React.Component {
 }
 
 export default QuestionControl;
+
+//showQuestions
+  //1
+  //2
+  //3
+//showForm
+//showTicketList
