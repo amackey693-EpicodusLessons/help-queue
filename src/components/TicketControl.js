@@ -13,7 +13,6 @@ class TicketControl extends React.Component {
       formVisibleOnPage: false,
       masterTicketList: [],
       currentQuestionNumber: 0 //index -1  question array
-      
     };
   }
 
@@ -22,7 +21,8 @@ class TicketControl extends React.Component {
     this.setState({
       masterTicketList: newMasterTicketList,
       formVisibleOnPage: false,
-      currentQuestionNumber: 0})
+      currentQuestionNumber: 0
+    })
   }
 
   handleFormClick = () => {
