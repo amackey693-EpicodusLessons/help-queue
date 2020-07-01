@@ -2,11 +2,13 @@ import React from "react";
 import Ticket from "./Ticket";
 import PropTypes from "prop-types";
 
+
 function TicketList(props){
   return (
     <React.Fragment>
       <hr/>
-      {props.masterTicketList.map((ticket, index) =>
+      
+      {props.ticketList.map((ticket, index) =>
         <Ticket 
         names={ticket.names}
         location={ticket.location}
@@ -18,7 +20,7 @@ function TicketList(props){
 }
 
 TicketList.propTypes = {
-  masterTicketList: PropTypes.array
+  ticketList: PropTypes.array
 };
 
 export default TicketList;

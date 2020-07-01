@@ -13,13 +13,16 @@ class TicketControl extends React.Component {
       formVisibleOnPage: false,
       masterTicketList: [],
       currentQuestionNumber: 0 //index -1  question array
+      
     };
   }
 
   handleAddingNewTicketToList = (newTicket) => {
     const newMasterTicketList = this.state.masterTicketList.concat(newTicket);
-    this.setState({masterTicketList: newMasterTicketList,
-    formVisibleOnPage: false})
+    this.setState({
+      masterTicketList: newMasterTicketList,
+      formVisibleOnPage: false,
+      currentQuestionNumber: 0})
   }
 
   handleFormClick = () => {
@@ -59,18 +62,21 @@ class TicketControl extends React.Component {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList}/>
       buttonText = "Return to Ticket List";
       buttonPage = this.handleFormClick;
+
     } else if (this.state.currentQuestionNumber === 1) {
       currentlyVisibleState = questionArray[0];
       buttonPage = this.handleQuestionClick;
       buttonText = "Yes";
       breakButton = <br />;
       backButton = <button onClick={this.handleBackClick}>No</button>
+
     } else if (this.state.currentQuestionNumber === 2) {
       currentlyVisibleState = questionArray[1];
       buttonPage = this.handleQuestionClick;
       buttonText = "Yes";
       breakButton = <br />;
       backButton = <button onClick={this.handleBackClick}>No</button>
+
     } else if (this.state.currentQuestionNumber === 3) {
       currentlyVisibleState = questionArray[2];
       buttonPage = this.handleFormClick;
@@ -79,7 +85,7 @@ class TicketControl extends React.Component {
       backButton = <button onClick={this.handleBackClick}>No</button>
     }
     else {
-      currentlyVisibleState = <TicketList ticketList={this.setState.masterTicketList}/>;
+      currentlyVisibleState = <TicketList ticketList={this.state.masterTicketList}/>;
       buttonText = "Add Ticket";
       buttonPage = this.handleQuestionClick;
     }
