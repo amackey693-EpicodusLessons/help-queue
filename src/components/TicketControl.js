@@ -60,19 +60,19 @@ class TicketControl extends React.Component {
       buttonPage = this.handleQuestionClick;
       buttonText = "Yes";
       breakButton = <br />;
-      backButton = <button onClick={this.handleBackClick}>Back</button>
+      backButton = <button onClick={this.handleBackClick}>No</button>
     } else if (this.state.currentQuestionNumber === 2) {
       currentlyVisibleState = questionArray[1];
       buttonPage = this.handleQuestionClick;
       buttonText = "Yes";
       breakButton = <br />;
-      backButton = <button onClick={this.handleBackClick}>Back</button>
+      backButton = <button onClick={this.handleBackClick}>No</button>
     } else if (this.state.currentQuestionNumber === 3) {
       currentlyVisibleState = questionArray[2];
       buttonPage = this.handleFormClick;
       buttonText = "Yes";
       breakButton = <br />;
-      backButton = <button onClick={this.handleBackClick}>Back</button>
+      backButton = <button onClick={this.handleBackClick}>No</button>
     }
     else {
       currentlyVisibleState = <TicketList />
