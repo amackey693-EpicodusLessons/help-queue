@@ -1,6 +1,7 @@
 import React from 'react';
 import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
+import TicketDetail from './TicketDetail';
 
 const questionArray = ["Have you gone through all the steps on the Learn How to Program debugging lesson?",
   "Have you asked another pair for help?",
@@ -12,8 +13,22 @@ class TicketControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       masterTicketList: [],
-      currentQuestionNumber: 0 //index -1  question array
+      selectedTicket: null,
+      currentQuestionNumber: 0 
     };
+  }
+
+  handleDeletingTicket = (id) => {
+    const newMasterTicketList = this.state.masterTicketList.filter(ticket => ticket.id !== id);
+    this.setState({
+      masterTicketList: newMasterTicketList, 
+      selectedTicket: null
+    });
+  }
+
+  handleChangingSelectedTicket = (id) => {
+    const selectedTicket = this.state.masterTicketList.filter(ticket => ticket.id === id)[0];
+    this.setState({selectedTicket: selectedTicket});
   }
 
   handleAddingNewTicketToList = (newTicket) => {
@@ -25,15 +40,20 @@ class TicketControl extends React.Component {
     })
   }
 
-  handleFormClick = () => {
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
-
+  handleClick = () => {  
     if (this.state.formVisibleOnPage) {
       this.setState({
         currentQuestionNumber: 0,
       })
+    } else if (this.state.selectedTicket != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedTicket: null
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }));
     }
   }
 
@@ -57,12 +77,18 @@ class TicketControl extends React.Component {
     let buttonPage = null;
     let breakButton = null;
     let backButton = null;
+    // Code from coursework
+    if (this.state.selectedTicket !=null) {
+      currentlyVisibleState = <TicketDetail ticket = {this.state.selectedTicket} onClickingDelete = {this.handleDeletingTicket} />
+      buttonText = "Return to Ticket List"
+      buttonPage = this.handleClick;
 
-    if (this.state.formVisibleOnPage) {
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList}/>
       buttonText = "Return to Ticket List";
-      buttonPage = this.handleFormClick;
+      buttonPage = this.handleBackClick;
 
+      // Code for question #1
     } else if (this.state.currentQuestionNumber === 1) {
       currentlyVisibleState = questionArray[0];
       buttonPage = this.handleQuestionClick;
@@ -70,6 +96,7 @@ class TicketControl extends React.Component {
       breakButton = <br />;
       backButton = <button onClick={this.handleBackClick}>No</button>
 
+      // Code for question #2
     } else if (this.state.currentQuestionNumber === 2) {
       currentlyVisibleState = questionArray[1];
       buttonPage = this.handleQuestionClick;
@@ -77,15 +104,17 @@ class TicketControl extends React.Component {
       breakButton = <br />;
       backButton = <button onClick={this.handleBackClick}>No</button>
 
+      // Code for question #3
     } else if (this.state.currentQuestionNumber === 3) {
       currentlyVisibleState = questionArray[2];
-      buttonPage = this.handleFormClick;
+      buttonPage = this.handleClick;
       buttonText = "Yes";
       breakButton = <br />;
       backButton = <button onClick={this.handleBackClick}>No</button>
     }
+    // Code from coursework
     else {
-      currentlyVisibleState = <TicketList ticketList={this.state.masterTicketList}/>;
+      currentlyVisibleState = <TicketList ticketList={this.state.masterTicketList} onTicketSelection = {this.handleChangingSelectedTicket}/>;
       buttonText = "Add Ticket";
       buttonPage = this.handleQuestionClick;
     }
