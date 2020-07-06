@@ -9,6 +9,30 @@ describe('ticketListReducer', () => {
     id: 1
   };
 
+  const currentState = {
+    1: {names: 'Ryan & Aimen',
+    location: '4B',
+    issue: 'Redux action is not working correctly',
+    id: 1 },
+    2: { names: 'Jasmine & Justine',
+    location: '2A',
+    issue: 'Reducer has side effects.',
+    id: 2 }
+  }
+
+  test('Should sucessfully delete a ticket', () => {
+    action = {
+      type: 'DELETE_TICKET',
+      id: 1
+    };
+    expect(ticketListReducer(currentState, action)).toEqual({
+      2: {names: 'Jasmine & Justine',
+      location: '2A',
+      issue: 'Reducer has side effects.',
+      id: 2}
+    });
+  });
+
   test('Should successfully add new ticket data to masterTicketList', () => {
     const { names, location, issue, id } = ticketData;
     action = {
