@@ -3,7 +3,10 @@ import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
 import TicketDetail from './TicketDetail';
 import EditTicketForm from './EditTicketForm';
+import {connect} from 'react-redux';
 
+
+TicketControl = connect()(TicketControl);
 
 const questionArray = ["Have you gone through all the steps on the Learn How to Program debugging lesson?",
   "Have you asked another pair for help?",
@@ -14,7 +17,6 @@ class TicketControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterTicketList: [],
       selectedTicket: null,
       editing: false, 
       currentQuestionNumber: 0 
