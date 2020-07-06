@@ -73,7 +73,10 @@ class TicketControl extends React.Component {
       issue: issue,
     }
     dispatch(action);
-    this.setState({formVisibleOnPage: false});
+    this.setState({
+      formVisibleOnPage: false,
+      currentQuestionNumber: 0
+    });
   }
 
   handleClick = () => {  
