@@ -1,8 +1,8 @@
 export default (state = false, action) => {
-  switch (action.type) {
+  switch (action.type) { 
     case 'TOGGLE_FORM':
       return !state;
-    default: 
-    return state;
+    default:
+      return state;
   }
 };
